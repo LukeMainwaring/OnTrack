@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  # ontrack-db:
+  #   image: mysql:8.0.18
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: belly123
+  #     MYSQL_DATABASE: luke_dev
+  #   ports:
+  #     - '3308:3306'
+  #   expose:
+  #     - '3306'
+  ontrack-api:
+    image: lfmainwaring/ontrack-server
+    build: .
+    ports:
+      - '8080:8080'
