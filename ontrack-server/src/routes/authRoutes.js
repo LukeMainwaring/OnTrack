@@ -28,6 +28,7 @@ router.post('/signup', async (req, res) => {
       const user = [[email, hash]];
       db.query(sql, [user], (error, results, fields) => {
         if (error) throw error;
+
         const token = jwt.sign({ userId: email }, 'MY_SECRET_KEY');
         res.send({
           message: 'New user has been created successfully.',
