@@ -9,6 +9,7 @@ import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import { setNavigator } from './src/navigationRef';
 
 import configureStore from './configureStore';
 const store = configureStore();
@@ -37,7 +38,11 @@ const App = createAppContainer(switchNavigator);
 export default () => {
   return (
     <Provider store={store}>
-      <App />
+      <App
+        ref={navigator => {
+          setNavigator(navigator);
+        }}
+      />
     </Provider>
   );
 };

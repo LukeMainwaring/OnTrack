@@ -7,11 +7,11 @@ import AuthForm from '../components/AuthForm';
 import NavLink from '../components/NavLink';
 import { signup } from '../actions/auth';
 
-const SignupScreen = ({ navigation, signup }) => {
+const SignupScreen = ({ errorMessage, navigation, signup }) => {
   return (
     <View style={styles.container}>
       <AuthForm
-        errorMessage={null}
+        errorMessage={errorMessage}
         submitButtonText='Sign Up'
         onSubmit={signup}
       />
@@ -39,8 +39,8 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = ({ auth }) => {
+  return { errorMessage: auth.errorMessage };
 };
 
 const mapDispatchToProps = dispatch => {

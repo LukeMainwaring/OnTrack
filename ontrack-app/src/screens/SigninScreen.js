@@ -17,7 +17,6 @@ const SigninScreen = ({ signin }) => {
         submitButtonText='Sign in'
       />
       <NavLink text="Don't have an account? Sign up here" routeName='Signup' />
-      <Button title='test signin' onPress={() => console.log('here')} />
     </View>
   );
 };

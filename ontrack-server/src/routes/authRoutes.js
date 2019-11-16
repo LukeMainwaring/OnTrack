@@ -8,15 +8,12 @@ const router = express.Router();
 // Add a new user
 router.post('/signup', async (req, res) => {
   const { email, password } = req.body;
-
   // TODO: more validation
   if (!email) {
-    return res
-      .status(422)
-      .send({ error: true, message: 'Please provide email' });
+    return res.status(422).send({ error: 'Please provide email' });
   }
   if (!password) {
-    return res.status(422).send({ message: 'Please provide password' });
+    return res.status(422).send({ error: 'Please provide password' });
   }
 
   const sql = 'INSERT INTO users (email, password) VALUE ? ';
@@ -27,7 +24,10 @@ router.post('/signup', async (req, res) => {
       if (err) throw err;
       const user = [[email, hash]];
       db.query(sql, [user], (error, results, fields) => {
-        if (error) throw error;
+        if (error) {
+          // TODO: format to a better error message
+          return res.status(422).send({ error: error.sqlMessage });
+        }
 
         const token = jwt.sign({ userId: email }, 'MY_SECRET_KEY');
         res.send({
