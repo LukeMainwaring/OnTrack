@@ -1,15 +1,22 @@
 import React from 'react';
 import { View, StyleSheet, Text, Button } from 'react-native';
+import { NavigationEvents } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import AuthForm from '../components/AuthForm';
 import NavLink from '../components/NavLink';
-import { signup } from '../actions/auth';
+import { signup, clearErrorMessage, tryLocalSignin } from '../actions/auth';
 
-const SignupScreen = ({ errorMessage, navigation, signup }) => {
+const SignupScreen = ({
+  errorMessage,
+  navigation,
+  signup,
+  clearErrorMessage
+}) => {
   return (
     <View style={styles.container}>
+      <NavigationEvents onWillBlur={clearErrorMessage} />
       <AuthForm
         errorMessage={errorMessage}
         submitButtonText='Sign Up'
@@ -46,7 +53,8 @@ const mapStateToProps = ({ auth }) => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      signup
+      signup,
+      clearErrorMessage
     },
     dispatch
   );

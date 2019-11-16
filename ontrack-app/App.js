@@ -9,6 +9,7 @@ import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
 import SignupScreen from './src/screens/SignupScreen';
 import HomeScreen from './src/screens/HomeScreen';
+import ResolveAuthScreen from './src/screens/ResolveAuthScreen';
 import { setNavigator } from './src/navigationRef';
 
 import configureStore from './configureStore';
@@ -26,6 +27,7 @@ const DrawerNavigatorConfig = {
 };
 
 const switchNavigator = createSwitchNavigator({
+  ResolveAuth: ResolveAuthScreen,
   loginFlow: createStackNavigator({
     Signup: SignupScreen,
     Signin: SigninScreen

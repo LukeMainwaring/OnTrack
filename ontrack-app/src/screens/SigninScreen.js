@@ -6,13 +6,14 @@ import { bindActionCreators } from 'redux';
 
 import AuthForm from '../components/AuthForm';
 import NavLink from '../components/NavLink';
-import { signin } from '../actions/auth';
+import { signin, clearErrorMessage } from '../actions/auth';
 
-const SigninScreen = ({ signin }) => {
+const SigninScreen = ({ signin, errorMessage, clearErrorMessage }) => {
   return (
     <View style={styles.container}>
+      <NavigationEvents onWillBlur={clearErrorMessage} />
       <AuthForm
-        errorMessage={null}
+        errorMessage={errorMessage}
         onSubmit={signin}
         submitButtonText='Sign in'
       />
@@ -33,14 +34,15 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapStateToProps = () => {
-  return {};
+const mapStateToProps = ({ auth }) => {
+  return { errorMessage: auth.errorMessage };
 };
 
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      signin
+      signin,
+      clearErrorMessage
     },
     dispatch
   );
