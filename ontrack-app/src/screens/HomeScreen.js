@@ -2,7 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import { Header } from 'react-native-elements';
 
-const HomeScreen = () => {
+const HomeScreen = ({ navigation }) => {
   return (
     <>
       <Header
@@ -12,7 +12,7 @@ const HomeScreen = () => {
           icon: 'menu',
           color: '#fff',
           size: 40,
-          onPress: () => console.log('here')
+          onPress: () => navigation.openDrawer()
         }}
         centerComponent={{ text: 'Home', style: styles.headerTitle }}
       />

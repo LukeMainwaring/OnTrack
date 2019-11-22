@@ -5,6 +5,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'react-native-elements';
+import { MaterialIcons } from '@expo/vector-icons';
 
 import AccountScreen from './src/screens/AccountScreen';
 import SigninScreen from './src/screens/SigninScreen';
@@ -23,12 +24,24 @@ const theme = {
 };
 
 const DrawerRouteConfigs = {
-  Home: { screen: HomeScreen },
-  Account: { screen: AccountScreen }
+  Home: {
+    screen: HomeScreen,
+    navigationOptions: {
+      drawerLabel: 'Home',
+      drawerIcon: <MaterialIcons name='home' style={{ fontSize: 28 }} />
+    }
+  },
+  Account: {
+    screen: AccountScreen,
+    navigationOptions: {
+      drawerLabel: 'Account',
+      drawerIcon: <MaterialIcons name='person' style={{ fontSize: 28 }} />
+    }
+  }
 };
 
 const DrawerNavigatorConfig = {
-  drawerWidth: 500,
+  drawerWidth: 320,
   drawerPosition: 'left',
   initialRouteName: 'Home'
 };
