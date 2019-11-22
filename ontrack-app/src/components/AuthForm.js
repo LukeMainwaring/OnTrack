@@ -1,52 +1,110 @@
 import React, { useState } from 'react';
-import { StyleSheet } from 'react-native';
-import { Text, Button, Input } from 'react-native-elements';
-import Spacer from './Spacer';
+import { StyleSheet, View } from 'react-native';
+import { Text, Button, Input, Card } from 'react-native-elements';
 
-const AuthForm = ({ errorMessage, onSubmit, submitButtonText }) => {
+import Spacer from './Spacer';
+import NavLink from './NavLink';
+
+const AuthForm = ({
+  errorMessage,
+  onSubmit,
+  submitButtonText,
+  redirectText,
+  routeName
+}) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   return (
-    <>
-      <Spacer>
-        <Text h3>OnTrack</Text>
-      </Spacer>
-      <Input
-        label='Email'
-        value={email}
-        onChangeText={setEmail}
-        autoCapitalize='none'
-        autoCorrect={false}
-      />
-      <Spacer />
-      <Input
-        secureTextEntry
-        label='Password'
-        value={password}
-        onChangeText={setPassword}
-        autoCapitalize='none'
-        autoCorrect={false}
-      />
-      {errorMessage ? (
-        <Text style={styles.errorMessage}>{errorMessage}</Text>
-      ) : null}
-      <Spacer>
-        <Button
-          title={submitButtonText}
-          onPress={() => onSubmit({ email, password })}
+    <View style={styles.formStyle}>
+      <Card
+        containerStyle={styles.cardStyle}
+        title='Welcome back!'
+        titleStyle={styles.cardTitleStyle}
+      >
+        <Input
+          containerStyle={styles.inputStyle}
+          leftIcon={{
+            type: 'material-icons',
+            name: 'person',
+            size: 40,
+            color: '#BCBCBC'
+          }}
+          leftIconContainerStyle={{ paddingRight: 10 }}
+          // label='Email'
+          placeholder='Email'
+          value={email}
+          onChangeText={setEmail}
+          autoCapitalize='none'
+          autoCorrect={false}
         />
-      </Spacer>
-    </>
+        <Spacer />
+        <Input
+          containerStyle={styles.inputStyle}
+          leftIcon={{
+            type: 'font-awesome',
+            name: 'lock',
+            size: 40,
+            color: '#BCBCBC'
+          }}
+          leftIconContainerStyle={{ paddingLeft: 6, paddingRight: 17 }}
+          secureTextEntry
+          // label='Password'
+          placeholder='Password'
+          value={password}
+          onChangeText={setPassword}
+          autoCapitalize='none'
+          autoCorrect={false}
+        />
+        {errorMessage ? (
+          <Text style={styles.errorMessage}>{errorMessage}</Text>
+        ) : null}
+        <Spacer>
+          <Button
+            buttonStyle={styles.buttonStyle}
+            title={submitButtonText}
+            titleStyle={styles.buttonTitleStyle}
+            onPress={() => onSubmit({ email, password })}
+          />
+        </Spacer>
+        <NavLink redirectText={redirectText} routeName={routeName} />
+      </Card>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
+  buttonTitleStyle: {
+    fontSize: 20,
+    fontWeight: 'bold'
+  },
+  cardStyle: {
+    borderRadius: 45
+  },
+  cardTitleStyle: {
+    fontSize: 25,
+    fontWeight: 'bold',
+    marginTop: 25
+  },
+  formStyle: {
+    marginBottom: 200
+  },
   errorMessage: {
     fontSize: 16,
     color: 'red',
     marginLeft: 15,
     marginTop: 15
+  },
+  buttonStyle: {
+    alignSelf: 'center',
+    borderRadius: 10,
+    marginTop: 10,
+    width: 275
+  },
+  inputStyle: {
+    alignSelf: 'center',
+    marginTop: 15,
+    width: 325
   }
 });
 

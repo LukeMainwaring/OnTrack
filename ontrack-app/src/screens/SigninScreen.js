@@ -1,23 +1,27 @@
 import React, { useContext } from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import AuthForm from '../components/AuthForm';
-import NavLink from '../components/NavLink';
 import { signin, clearErrorMessage } from '../actions/auth';
 
 const SigninScreen = ({ signin, errorMessage, clearErrorMessage }) => {
   return (
     <View style={styles.container}>
       <NavigationEvents onWillBlur={clearErrorMessage} />
+      <Image
+        source={require('../../assets/OnTrack-login.png')}
+        style={styles.image}
+      />
       <AuthForm
         errorMessage={errorMessage}
         onSubmit={signin}
-        submitButtonText='Sign in'
+        submitButtonText='Login'
+        redirectText='New user'
+        routeName='Signup'
       />
-      <NavLink text="Don't have an account? Sign up here" routeName='Signup' />
     </View>
   );
 };
@@ -30,7 +34,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    marginBottom: 200
+    backgroundColor: '#42AEC6'
+  },
+  image: {
+    flex: 1,
+    height: null,
+    width: null
   }
 });
 

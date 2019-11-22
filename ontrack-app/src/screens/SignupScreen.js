@@ -1,34 +1,26 @@
 import React from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Image } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import AuthForm from '../components/AuthForm';
-import NavLink from '../components/NavLink';
-import { signup, clearErrorMessage, tryLocalSignin } from '../actions/auth';
+import { signup, clearErrorMessage } from '../actions/auth';
 
-const SignupScreen = ({
-  errorMessage,
-  navigation,
-  signup,
-  clearErrorMessage
-}) => {
+const SignupScreen = ({ errorMessage, signup, clearErrorMessage }) => {
   return (
     <View style={styles.container}>
       <NavigationEvents onWillBlur={clearErrorMessage} />
+      <Image
+        source={require('../../assets/OnTrack-login.png')}
+        style={styles.image}
+      />
       <AuthForm
         errorMessage={errorMessage}
         submitButtonText='Sign Up'
         onSubmit={signup}
-      />
-      <NavLink
+        redirectText='Already have an account? Sign in here'
         routeName='Signin'
-        text='Already have an account? Sign in here'
-      />
-      <Button
-        title='Go to main flow'
-        onPress={() => navigation.navigate('mainFlow')}
       />
     </View>
   );
@@ -42,7 +34,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    marginBottom: 200
+    backgroundColor: '#42AEC6'
+  },
+  image: {
+    flex: 1,
+    height: null,
+    width: null
   }
 });
 

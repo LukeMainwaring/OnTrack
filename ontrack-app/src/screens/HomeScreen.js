@@ -7,15 +7,29 @@ const HomeScreen = () => {
     <>
       <Header
         // TODO: convert leftComponent to custom drawer component
-        leftComponent={{ icon: 'menu', color: '#fff' }}
-        centerComponent={{ text: 'Home', style: { color: '#fff' } }}
-        backgroundColor='#53B6AF'
+        containerStyle={styles.headerContainer}
+        leftComponent={{
+          icon: 'menu',
+          color: '#fff',
+          size: 40,
+          onPress: () => console.log('here')
+        }}
+        centerComponent={{ text: 'Home', style: styles.headerTitle }}
       />
       <Text>HomeScreen</Text>
     </>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  headerContainer: {
+    height: 125
+  },
+  headerTitle: {
+    color: '#fff',
+    fontSize: 27,
+    fontWeight: 'bold'
+  }
+});
 
 export default HomeScreen;
