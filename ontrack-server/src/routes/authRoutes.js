@@ -7,7 +7,6 @@ const router = express.Router();
 
 // Add a new user
 router.post('/signup', async (req, res) => {
-  console.log(req.body);
   const { firstName, lastName, email, password } = req.body;
   // TODO: more validation
   if (!firstName) {
