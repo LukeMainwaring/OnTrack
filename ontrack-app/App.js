@@ -1,8 +1,7 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-// import { createBottomTabNavigator } from 'react-navigation-tabs';
-import { createDrawerNavigator } from 'react-navigation-drawer';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'react-native-elements';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -23,27 +22,21 @@ const theme = {
   }
 };
 
-const DrawerRouteConfigs = {
+const BottomTabRouteConfigs = {
   Home: {
     screen: HomeScreen,
     navigationOptions: {
-      drawerLabel: 'Home',
-      drawerIcon: <MaterialIcons name='home' style={{ fontSize: 28 }} />
+      tabBarLabel: 'Home',
+      tabBarIcon: <MaterialIcons name='home' style={{ fontSize: 28 }} />
     }
   },
   Account: {
     screen: AccountScreen,
     navigationOptions: {
-      drawerLabel: 'Account',
-      drawerIcon: <MaterialIcons name='person' style={{ fontSize: 28 }} />
+      tabBarLabel: 'Account',
+      tabBarIcon: <MaterialIcons name='person' style={{ fontSize: 28 }} />
     }
   }
-};
-
-const DrawerNavigatorConfig = {
-  drawerWidth: 320,
-  drawerPosition: 'left',
-  initialRouteName: 'Home'
 };
 
 const switchNavigator = createSwitchNavigator({
@@ -52,7 +45,7 @@ const switchNavigator = createSwitchNavigator({
     Signin: SigninScreen,
     Signup: SignupScreen
   }),
-  mainFlow: createDrawerNavigator(DrawerRouteConfigs, DrawerNavigatorConfig)
+  mainFlow: createBottomTabNavigator(BottomTabRouteConfigs)
 });
 
 const App = createAppContainer(switchNavigator);
