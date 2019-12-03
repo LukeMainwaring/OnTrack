@@ -7,8 +7,15 @@ const router = express.Router();
 
 // Add a new user
 router.post('/signup', async (req, res) => {
-  const { email, password } = req.body;
+  console.log(req.body);
+  const { firstName, lastName, email, password } = req.body;
   // TODO: more validation
+  if (!firstName) {
+    return res.status(422).send({ error: 'Please provide first name' });
+  }
+  if (!lastName) {
+    return res.status(422).send({ error: 'Please provide last name' });
+  }
   if (!email) {
     return res.status(422).send({ error: 'Please provide email' });
   }
@@ -16,13 +23,14 @@ router.post('/signup', async (req, res) => {
     return res.status(422).send({ error: 'Please provide password' });
   }
 
-  const sql = 'INSERT INTO users (email, password) VALUE ? ';
+  const sql =
+    'INSERT INTO users (first_name, last_name, email, password) VALUE ? ';
   // generate encrypted password before signup
   bcrypt.genSalt(10, (err, salt) => {
     if (err) throw err;
     bcrypt.hash(password, salt, (err, hash) => {
       if (err) throw err;
-      const user = [[email, hash]];
+      const user = [[firstName, lastName, email, hash]];
       db.query(sql, [user], (error, results, fields) => {
         if (error) {
           // TODO: format to a better error message

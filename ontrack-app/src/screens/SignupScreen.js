@@ -4,10 +4,10 @@ import { NavigationEvents } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import AuthForm from '../components/AuthForm';
 import { signup, clearErrorMessage } from '../actions/auth';
+import SignupForm from '../components/SignupForm';
 
-const SignupScreen = ({ errorMessage, signup, clearErrorMessage }) => {
+const SignupScreen = ({ errorMessage, clearErrorMessage }) => {
   return (
     <View style={styles.container}>
       <NavigationEvents onWillBlur={clearErrorMessage} />
@@ -15,13 +15,7 @@ const SignupScreen = ({ errorMessage, signup, clearErrorMessage }) => {
         source={require('../../assets/OnTrack-login.png')}
         style={styles.image}
       />
-      <AuthForm
-        errorMessage={errorMessage}
-        submitButtonText='Sign Up'
-        onSubmit={signup}
-        redirectText='Already have an account? Sign in here'
-        routeName='Signin'
-      />
+      <SignupForm errorMessage={errorMessage} />
     </View>
   );
 };
@@ -34,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#42AEC6'
+    backgroundColor: '#4EC6D6'
   },
   image: {
     flex: 1,

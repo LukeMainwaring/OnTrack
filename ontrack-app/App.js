@@ -19,7 +19,7 @@ const store = configureStore();
 
 const theme = {
   colors: {
-    primary: '#42AEC6'
+    primary: '#4EC6D6'
   }
 };
 

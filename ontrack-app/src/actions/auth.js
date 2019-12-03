@@ -22,9 +22,19 @@ export const signin = ({ email, password }) => async dispatch => {
   }
 };
 
-export const signup = ({ email, password }) => async dispatch => {
+export const signup = ({
+  firstName,
+  lastName,
+  email,
+  password
+}) => async dispatch => {
   try {
-    const response = await ontrackApi.post('/signup', { email, password });
+    const response = await ontrackApi.post('/signup', {
+      firstName,
+      lastName,
+      email,
+      password
+    });
     await AsyncStorage.setItem('token', response.data.token);
     dispatch({ type: SIGNIN, payload: response.data.token });
     navigate('Home');

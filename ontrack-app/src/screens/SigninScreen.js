@@ -4,10 +4,10 @@ import { NavigationEvents } from 'react-navigation';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import AuthForm from '../components/AuthForm';
-import { signin, clearErrorMessage } from '../actions/auth';
+import { clearErrorMessage } from '../actions/auth';
+import SigninForm from '../components/SigninForm';
 
-const SigninScreen = ({ signin, errorMessage, clearErrorMessage }) => {
+const SigninScreen = ({ errorMessage, clearErrorMessage }) => {
   return (
     <View style={styles.container}>
       <NavigationEvents onWillBlur={clearErrorMessage} />
@@ -15,13 +15,7 @@ const SigninScreen = ({ signin, errorMessage, clearErrorMessage }) => {
         source={require('../../assets/OnTrack-login.png')}
         style={styles.image}
       />
-      <AuthForm
-        errorMessage={errorMessage}
-        onSubmit={signin}
-        submitButtonText='Login'
-        redirectText='New user'
-        routeName='Signup'
-      />
+      <SigninForm errorMessage={errorMessage} />
     </View>
   );
 };
@@ -34,7 +28,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#42AEC6'
+    backgroundColor: '#4EC6D6'
   },
   image: {
     flex: 1,
@@ -50,7 +44,6 @@ const mapStateToProps = ({ auth }) => {
 const mapDispatchToProps = dispatch => {
   return bindActionCreators(
     {
-      signin,
       clearErrorMessage
     },
     dispatch
