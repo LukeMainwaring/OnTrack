@@ -18,9 +18,5 @@ app.use(
 app.use(authRoutes);
 app.use(userRoutes);
 
-app.get('/', (req, res) => {
-  res.send('Hello world!!\n');
-});
-
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

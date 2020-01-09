@@ -23,14 +23,14 @@ router.post('/signup', async (req, res) => {
   }
 
   const sql =
-    'INSERT INTO users (first_name, last_name, email, password) VALUE ? ';
+    'INSERT INTO users (first_name, last_name, email, password) VALUES($1, $2, $3, $4) ';
   // generate encrypted password before signup
   bcrypt.genSalt(10, (err, salt) => {
     if (err) throw err;
     bcrypt.hash(password, salt, (err, hash) => {
       if (err) throw err;
-      const user = [[firstName, lastName, email, hash]];
-      db.query(sql, [user], (error, results, fields) => {
+      const user = [firstName, lastName, email, hash];
+      db.query(sql, user, (error, results, fields) => {
         if (error) {
           // TODO: format to a better error message
           return res.status(422).send({ error: error.sqlMessage });
@@ -54,11 +54,11 @@ router.post('/signin', async (req, res) => {
   }
 
   db.query(
-    'SELECT * FROM users where email=?',
-    email,
+    'SELECT * FROM users where email=$1',
+    [email],
     (error, results, fields) => {
       if (error) throw error;
-      user = results[0];
+      user = results.rows[0];
 
       // User validation
       if (!user) {
